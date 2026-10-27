@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop — GreenMart</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="container nav-inner">
+      <a href="index.html" class="logo">GreenMart</a>
+      <ul class="nav-links">
+        <li><a href="index.html">Beranda</a></li>
+        <li><a href="catalog.html" class="active">Shop</a></li>
+        <li><a href="manage.html">Kelola Produk</a></li>
+      </ul>
+      <div class="nav-actions">
+        <span class="nav-icon-btn" title="Search">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        </span>
+        <span class="nav-icon-btn nav-cart" title="Cart">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
+          <span class="cart-badge">0</span>
+        </span>
+        <span class="user-avatar" title="Account">GM</span>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="container">
+      <h1>Shop</h1>
+      <p>Give All You Need</p>
+    </div>
+  </section>
+
+  <!-- SEARCH BAR -->
+  <section class="search-section">
+    <div class="container">
+      <div class="search-bar">
+        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="text" id="search-input" placeholder="Search on GreenMart" autocomplete="off" />
+        <button class="search-clear" id="search-clear" title="Hapus pencarian">&times;</button>
+        <button class="btn btn-dark btn-search-submit" id="btn-search-submit">Search</button>
+      </div>
+      <div class="search-meta" id="search-meta"></div>
+    </div>
+  </section>
+
+  <!-- CATALOG WITH SIDEBAR -->
+  <main class="catalog-main">
+    <div class="container catalog-layout">
+
+      <!-- CATEGORY SIDEBAR -->
+      <aside class="catalog-sidebar">
+        <div class="sidebar-block">
+          <h3>Category</h3>
+          <ul class="category-filter-list" id="category-filter-list">
+            <li>
+              <button class="cat-filter-btn active" data-category="all">
+                <span>All Product</span>
+                <span class="cat-count" id="count-all">0</span>
+              </button>
+            </li>
+            <li>
+              <button class="cat-filter-btn" data-category="beauty">
+                <span>Beauty</span>
+                <span class="cat-count" id="count-beauty">0</span>
+              </button>
+            </li>
+            <li>
+              <button class="cat-filter-btn" data-category="groceries">
+                <span>Groceries</span>
+                <span class="cat-count" id="count-groceries">0</span>
+              </button>
+            </li>
+            <li>
+              <button class="cat-filter-btn" data-category="furniture">
+                <span>Furniture</span>
+                <span class="cat-count" id="count-furniture">0</span>
+              </button>
+            </li>
+            <li>
+              <button class="cat-filter-btn" data-category="electronics">
+                <span>Electronics</span>
+                <span class="cat-count" id="count-electronics">0</span>
+              </button>
+            </li>
+            <li>
+              <button class="cat-filter-btn" data-category="laptops">
+                <span>Laptops</span>
+                <span class="cat-count" id="count-laptops">0</span>
+              </button>
+            </li>
+            <li>
+              <button class="cat-filter-btn" data-category="smartphones">
+                <span>Smartphones</span>
+                <span class="cat-count" id="count-smartphones">0</span>
+              </button>
+            </li>
+            <li>
+              <button class="cat-filter-btn" data-category="home-decoration">
+                <span>Home Decoration</span>
+                <span class="cat-count" id="count-home-decoration">0</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </aside>
+
+      <!-- CATALOG CONTENT -->
+      <section class="catalog-content">
+        <!-- Status area: loading / error -->
+        <div id="catalog-status"></div>
+
+        <!-- Grid produk -->
+        <div id="product-grid" class="product-grid"></div>
+
+        <!-- Empty state -->
+        <div id="empty-state" class="empty-state" style="display:none;">
+          <h3>Produk Tidak Ditemukan</h3>
+          <p>Coba gunakan kata kunci lain atau pilih kategori yang berbeda.</p>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- RECOMMENDATIONS SECTION -->
+  <section class="section recommendations-section">
+    <div class="container">
+      <div class="section-header-row">
+        <h2>Explore Our Recommendations</h2>
+      </div>
+      <div class="product-grid" id="recommendations-grid"></div>
+    </div>
+  </section>
+
+  <!-- CTA BOX -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-box">
+        <div class="cta-left">
+          <h2>Ready to Get<br/>Our New Stuff?</h2>
+          <form class="cta-form" onsubmit="event.preventDefault(); alert('Terima kasih telah berlangganan!');">
+            <input type="email" placeholder="Your Email" required />
+            <button type="submit" class="btn btn-dark">Send</button>
+          </form>
+        </div>
+        <div class="cta-right">
+          <h4>GreenMart for Homes and Needs</h4>
+          <p>We'll listen to your needs, identify the best approach, and then create a bespoke smart solution that's right for you.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-col">
+        <h4>About</h4>
+        <ul>
+          <li><a href="index.html">Beranda</a></li>
+          <li><a href="catalog.html">Shop</a></li>
+          <li><a href="manage.html">Kelola Produk</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <ul>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Shipping</a></li>
+          <li><a href="#">Return</a></li>
+          <li><a href="#">FAQ</a></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-col-right">
+        <h4>Social Media</h4>
+        <div class="social-links">
+          <a href="#" class="social-btn" title="X (Twitter)">X</a>
+          <a href="#" class="social-btn" title="Facebook">f</a>
+          <a href="#" class="social-btn" title="LinkedIn">in</a>
+          <a href="#" class="social-btn" title="Instagram">ig</a>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="footer-bottom">
+        <p>Copyright &copy; 2026 GreenMart. All Rights Reserved.</p>
+        <div class="footer-policy-links">
+          <a href="#">Terms of Service</a> &middot; <a href="#">Privacy Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
